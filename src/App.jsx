@@ -21,7 +21,7 @@ function Display({ value }) {
   const setClassName = (val) => {
     let clsName;
     if (val.length <= 6) {
-      clsName = 'output-value'
+      clsName = 'output-value';
     } else if (val.length === 7) {
       clsName = 'output-value shrink-1';
     } else if (val.length === 8) {
@@ -30,8 +30,8 @@ function Display({ value }) {
       clsName = 'output-value shrink-3';
     }
     return clsName;
-  }
-  return <div className={setClassName(value)}>{value}</div>
+  };
+  return <div className={setClassName(value)}>{value}</div>;
 }
 
 function Calculator() {
@@ -50,7 +50,7 @@ function Calculator() {
       setDisplay(n);
       setCurrentValue(n);
     } else {
-      setDisplay(display += n);
+      setDisplay((display += n));
       setCurrentValue(display);
     }
   };
@@ -69,19 +69,23 @@ function Calculator() {
     // would like to keep the display where it is instead of clearing it out.
     // current need to make it zero to update the currentValue for calculations.
     setDisplay('0');
-  }
+  };
 
   const handleCalculation = () => {
     let output;
-    let leftHand = previousValue.includes('.') ? parseFloat(previousValue) : parseInt(previousValue);
-    let rightHand = currentValue.includes('.') ? parseFloat(currentValue) : parseInt(currentValue);
+    let leftHand = previousValue.includes('.')
+      ? parseFloat(previousValue)
+      : parseInt(previousValue);
+    let rightHand = currentValue.includes('.')
+      ? parseFloat(currentValue)
+      : parseInt(currentValue);
     if (additionClicked) {
-      output = leftHand + rightHand 
+      output = leftHand + rightHand;
       setDisplay(output.toString());
       setCurrentValue('0');
       setPreviousValue('0');
     }
-  }
+  };
 
   return (
     <section className="calculator">
@@ -94,7 +98,11 @@ function Calculator() {
           value="AC"
           handleClick={() => handleClear()}
         />
-        <Button className={'btn light-gray'} value="&plusmn;" handleClick={() => console.log(currentValue)} />
+        <Button
+          className={'btn light-gray'}
+          value="&plusmn;"
+          handleClick={() => console.log(currentValue)}
+        />
         <Button className={'btn light-gray'} value="&#37;" />
         <Button className={'btn orange'} value="&divide;" />
       </ButtonRow>
@@ -150,12 +158,28 @@ function Calculator() {
           value="3"
           handleClick={() => handleAddToDisplay('3')}
         />
-        <Button className={'btn orange'} value="&#43;" handleClick={() => handleAdditionClick()} />
+        <Button
+          className={'btn orange'}
+          value="&#43;"
+          handleClick={() => handleAdditionClick()}
+        />
       </ButtonRow>
       <ButtonRow>
-        <Button className={'btn dark-gray zero-btn'} value="0" handleClick={() => handleAddToDisplay('0')} />
-        <Button className={'btn dark-gray'} value="." handleClick={() => handleAddToDisplay('.')} />
-        <Button className={'btn orange'} value="&#61;" handleClick={() => handleCalculation()} />
+        <Button
+          className={'btn dark-gray zero-btn'}
+          value="0"
+          handleClick={() => handleAddToDisplay('0')}
+        />
+        <Button
+          className={'btn dark-gray'}
+          value="."
+          handleClick={() => handleAddToDisplay('.')}
+        />
+        <Button
+          className={'btn orange'}
+          value="&#61;"
+          handleClick={() => handleCalculation()}
+        />
       </ButtonRow>
     </section>
   );
