@@ -41,14 +41,14 @@ function Calculator() {
   let [previousValue, setPreviousValue] = useState('0');
   let [additionClicked, setAdditionClicked] = useState(false);
 
-  const handleAddNumberToDisplay = (n) => {
+  const handleAddToDisplay = (n) => {
     // iOS calculator doesn't go beyond 9 in portrait view so stop taking input
     if (display.length >= MAX_DISPLAY_LENGTH) {
       return;
     }
     if (display === '0') {
       setDisplay(n);
-      setCurrentValue(display);
+      setCurrentValue(n);
     } else {
       setDisplay(display += n);
       setCurrentValue(display);
@@ -73,8 +73,10 @@ function Calculator() {
 
   const handleCalculation = () => {
     let output;
+    let leftHand = previousValue.includes('.') ? parseFloat(previousValue) : parseInt(previousValue);
+    let rightHand = currentValue.includes('.') ? parseFloat(currentValue) : parseInt(currentValue);
     if (additionClicked) {
-      output = parseInt(previousValue) + parseInt(currentValue);
+      output = leftHand + rightHand 
       setDisplay(output.toString());
       setCurrentValue('0');
       setPreviousValue('0');
@@ -100,17 +102,17 @@ function Calculator() {
         <Button
           className={'btn dark-gray'}
           value="7"
-          handleClick={() => handleAddNumberToDisplay('7')}
+          handleClick={() => handleAddToDisplay('7')}
         />
         <Button
           className={'btn dark-gray'}
           value="8"
-          handleClick={() => handleAddNumberToDisplay('8')}
+          handleClick={() => handleAddToDisplay('8')}
         />
         <Button
           className={'btn dark-gray'}
           value="9"
-          handleClick={() => handleAddNumberToDisplay('9')}
+          handleClick={() => handleAddToDisplay('9')}
         />
         <Button className={'btn orange'} value="&times;" />
       </ButtonRow>
@@ -118,17 +120,17 @@ function Calculator() {
         <Button
           className={'btn dark-gray'}
           value="4"
-          handleClick={() => handleAddNumberToDisplay('4')}
+          handleClick={() => handleAddToDisplay('4')}
         />
         <Button
           className={'btn dark-gray'}
           value="5"
-          handleClick={() => handleAddNumberToDisplay('5')}
+          handleClick={() => handleAddToDisplay('5')}
         />
         <Button
           className={'btn dark-gray'}
           value="6"
-          handleClick={() => handleAddNumberToDisplay('6')}
+          handleClick={() => handleAddToDisplay('6')}
         />
         <Button className={'btn orange'} value="&minus;" />
       </ButtonRow>
@@ -136,23 +138,23 @@ function Calculator() {
         <Button
           className={'btn dark-gray'}
           value="1"
-          handleClick={() => handleAddNumberToDisplay('1')}
+          handleClick={() => handleAddToDisplay('1')}
         />
         <Button
           className={'btn dark-gray'}
           value="2"
-          handleClick={() => handleAddNumberToDisplay('2')}
+          handleClick={() => handleAddToDisplay('2')}
         />
         <Button
           className={'btn dark-gray'}
           value="3"
-          handleClick={() => handleAddNumberToDisplay('3')}
+          handleClick={() => handleAddToDisplay('3')}
         />
         <Button className={'btn orange'} value="&#43;" handleClick={() => handleAdditionClick()} />
       </ButtonRow>
       <ButtonRow>
-        <Button className={'btn dark-gray zero-btn'} value="0" handleClick={() => handleAddNumberToDisplay('0')} />
-        <Button className={'btn dark-gray'} value="." />
+        <Button className={'btn dark-gray zero-btn'} value="0" handleClick={() => handleAddToDisplay('0')} />
+        <Button className={'btn dark-gray'} value="." handleClick={() => handleAddToDisplay('.')} />
         <Button className={'btn orange'} value="&#61;" handleClick={() => handleCalculation()} />
       </ButtonRow>
     </section>
