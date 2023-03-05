@@ -39,6 +39,7 @@ function Calculator() {
   let [display, setDisplay] = useState('0');
   let [currentValue, setCurrentValue] = useState(display);
   let [previousValue, setPreviousValue] = useState('0');
+  let [additionClicked, setAdditionClicked] = useState(false);
 
   const handleAddNumberToDisplay = (n) => {
     // iOS calculator doesn't go beyond 9 in portrait view so stop taking input
@@ -58,9 +59,11 @@ function Calculator() {
     setDisplay('0');
     setCurrentValue('0');
     setPreviousValue('0');
+    setAdditionClicked(false);
   };
 
   const handleAdditionClick = () => {
+    setAdditionClicked(true);
     setPreviousValue(currentValue);
     setCurrentValue('0');
     // would like to keep the display where it is instead of clearing it out.
@@ -69,10 +72,13 @@ function Calculator() {
   }
 
   const handleCalculation = () => {
-    let output = parseInt(previousValue) + parseInt(currentValue);
-    setDisplay(output.toString());
-    setPreviousValue('0');
-    setCurrentValue('0');
+    let output;
+    if (additionClicked) {
+      output = parseInt(previousValue) + parseInt(currentValue);
+      setDisplay(output.toString());
+      setCurrentValue('0');
+      setPreviousValue('0');
+    }
   }
 
   return (
