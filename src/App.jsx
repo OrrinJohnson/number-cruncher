@@ -19,6 +19,9 @@ function ButtonRow({ children }) {
 
 function Display({ value }) {
   const setClassName = (val) => {
+    // on the iOS calculator, when there are more
+    // than 6 numbers in the display, the font size
+    // begins to decrease until there are 9 numbers total
     let clsName;
     if (val.length <= 6) {
       clsName = 'output-value';
@@ -81,6 +84,9 @@ function Calculator() {
       : parseInt(currentValue);
     if (additionClicked) {
       output = leftHand + rightHand;
+      if (output.toString().length > 9) {
+        output = output.toExponential(1);
+      }
       setDisplay(output.toString());
       setCurrentValue('0');
       setPreviousValue('0');
