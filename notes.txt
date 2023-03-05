@@ -1,0 +1,5 @@
+when an operator button is clicked (+, -, /, x), the current display value needs to be stored/stashed
+when new values are input the display should update to reflect these new values
+the calculation should be done on the stashed value and the most current display value
+
+when operator button is clicked, current value becomes zero again and the previous value is stored
